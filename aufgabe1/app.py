@@ -84,6 +84,8 @@ app.layout = html.Div([
     ], style={'width': '68%', 'display': 'inline-block'})
 ])
 
+# Callbacks ***************************************************************
+
 @app.callback(
     [Output('age-dist', 'figure'),
      Output('wage-dist', 'figure'),
