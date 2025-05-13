@@ -16,14 +16,14 @@ df.columns = (
     df.columns
     .str.strip("'\"")
     .str.strip()
-    #.str.replace(' ', '_')
-    #.str.replace(r'[^0-9a-zA-Z_]', '', regex=True)
 )
+
 #print(df.columns)
 df = df[['Known As','Full Name','Overall','Nationality','Age','Club Name','Wage(in Euro)']]
 df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
 df['Wage(in Euro)'] = pd.to_numeric(df['Wage(in Euro)'], errors='coerce')
 df = df.dropna(subset=['Age','Wage(in Euro)'])
+#df = df[df['Wage(in Euro)'] > 0.0]
 df = df.reset_index(drop=True)
 #print(df.head(5))
 df.to_csv('Aufgabe1_cleaned.csv', index=False)
@@ -42,9 +42,6 @@ clubs = df['Club Name'].dropna().unique()
 
 app.layout = html.Div([
 
-
-
-
     html.Div([
         html.H1("Football Player Data Visualization"),
         html.Label("Age Range:"),
@@ -60,7 +57,8 @@ app.layout = html.Div([
                         marks={i: f'{i:,}' for i in range(
                         int(df['Wage(in Euro)'].min()),
                         int(df['Wage(in Euro)'].max()),
-                        100000  )}),
+                        100000)}),
+                          
 
         html.Label("Overall Range:"),
         dcc.RangeSlider(id='overall-slider',
@@ -127,6 +125,7 @@ def update_graphs(age_range, wage_range, overall_range, nationalities, clubs):
 
     wage_box = px.box(dff, y="Wage(in Euro)", points="all", title="Wage Distribution")
     wage_box.update_traces(marker_color="#28a745")
+    wage_box.update_layout(yaxis_type='log')
 
     overall_box = px.box(dff, y="Overall", points="all", title="Overall Distribution")
     overall_box.update_traces(marker_color="#6c757d")

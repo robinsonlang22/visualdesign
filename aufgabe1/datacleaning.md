@@ -1,15 +1,12 @@
-# Datenbereinigung (datacleaning.md)
+# Datenbereinigung
 
 ## Einlesen der Datei
 
-- Die Datei wurde mit dem Dateinamen `Aufgabe1.csv` eingelesen.
-- Der verwendete Zeichensatz war `latin-1`.
-- Als Spaltentrenner wurde das Komma `,` verwendet.
-
-## Spaltennamen bereinigen
-
-- Anführungszeichen (`'` und `"`) sowie führende und nachfolgende Leerzeichen wurden aus allen Spaltennamen entfernt.
-- Die Umbenennung/Ersetzung von Leerzeichen oder Sonderzeichen in Spaltennamen wurde vorbereitet, aber bewusst auskommentiert, um die Originalnamen beizubehalten.
+- Die Spalten CL, CM, CN ( fehlende Attribute ) wurden direkt von der originalen Datei gelöscht
+- Die Datei wurde mit dem Dateinamen `Aufgabe1.csv` eingelesen
+- Der verwendete Zeichensatz war `latin-1`
+- Als Spaltentrenner wurde das Komma `,` verwendet
+- Anführungszeichen sowie führende und nachfolgende Leerzeichen wurden aus allen Spaltennamen entfernt
 
 ## Auswahl relevanter Spalten
 
@@ -22,15 +19,12 @@
   - `'Club Name'`
   - `'Wage(in Euro)'`
 
-## Datentypkonvertierung
+## Daten prüfen und reinigen
 
-- Die Spalten `'Age'` und `'Wage(in Euro)'` wurden in numerische Datentypen umgewandelt (`to_numeric()`).
-- Nicht konvertierbare Werte (z. B. Zeichenketten oder ungültige Einträge) wurden dabei zu `NaN`.
-
-## Umgang mit fehlenden Werten
-
-- Alle Zeilen mit fehlenden Werten (`NaN`) in den Spalten `'Age'` oder `'Wage(in Euro)'` wurden entfernt.
+- Die Spalten `'Age'` und `'Wage(in Euro)'` wurden in numerische Datentypen umgewandelt (`to_numeric()`)
+- Nicht konvertierbare Werte wurden dabei zu `NaN`
+- Alle Zeilen mit fehlenden Werten `NaN` in den Spalten `'Age'` oder `'Wage(in Euro)'` wurden entfernt
 
 ## Index zurücksetzen
 
-- Der Index des DataFrames wurde nach dem Entfernen von Zeilen neu gesetzt (`reset_index(drop=True)`), um eine saubere fortlaufende Nummerierung zu gewährleisten.
+- Der Index des DataFrames wurde nach dem Entfernen von Zeilen neu gesetzt, um eine saubere fortlaufende Nummerierung zu gewährleisten
