@@ -26,7 +26,7 @@ app.layout = html.Div([
         dcc.Dropdown(
             id='x-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
-            value='Farbwert'
+            value='Flavanoide'
         ),
     ], style={'width': '48%', 'display': 'inline-block'}),
 
@@ -35,7 +35,7 @@ app.layout = html.Div([
         dcc.Dropdown(
             id='y-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
-            value='Proteinwert'
+            value='Alle_Phenole'
         ),
     ], style={'width': '48%', 'display': 'inline-block'}),
 
@@ -105,7 +105,7 @@ def update_graph(x_col, y_col, leaderboard_data):
     fig.add_trace(go.Scatter(x=x.flatten(), y=y_pred, mode='lines', name='Fit'))
 
     fig.update_layout(
-        title=f"liner regression：{x_col} vs {y_col} <br>R² score: {r2:.4f}",
+        title=f"liner regression：{x_col} ~ {y_col} <br>R² score: {r2:.4f}",
         xaxis_title=x_col,
         yaxis_title=y_col,
         template="plotly_white"
