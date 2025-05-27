@@ -1,0 +1,19 @@
+
+model.labels results of the clustering
+use this data to show the results
+
+1. die Kurve des Davies Bouldin Index und die Silhoutte Coefficients der verschiedenen Läufe visuell dar.
+ different curves for the different clusters
+
+- daten aller scores für verschiedene kluster speichern, dann mit diagramm darstellen, x achse cluster, y achse score
+- 1 diagramm für davies, 1 für silhoutte
+
+2. graph for kmeans clustrering with 2 components
+
+3. Scree Plot PCA (exists)
+
+
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+
+
+state to recall the data, callbacks, leaderboard store
