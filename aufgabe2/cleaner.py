@@ -14,6 +14,10 @@ for column in columns_need_clean:
 
 # print(df.head(5))
 # print(df.dtypes)
+
+# Ausreißer Farbwert 906 entfernen
+df = df.drop(index=70)
+
 df.reset_index(drop=True)
 df.to_csv('wein_cleaned.csv', index=False)
 
