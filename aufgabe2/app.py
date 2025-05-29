@@ -19,10 +19,10 @@ initial_leaderboard = []
 # Layout
 app.layout = html.Div([
     html.H1("Wine Data: Regression and Clustering"),
-    html.H2("please select the two varibles to generate the graph"),
+    html.H2("Please select the two varibles to generate the graph"),
 
     html.Div([
-        html.Label("varible x"),
+        html.Label("VARIBEL X"),
         dcc.Dropdown(
             id='x-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
@@ -31,7 +31,7 @@ app.layout = html.Div([
     ], style={'width': '48%', 'display': 'inline-block'}),
 
     html.Div([
-        html.Label("varible y"),
+        html.Label("VARIBEL Y"),
         dcc.Dropdown(
             id='y-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
@@ -41,7 +41,7 @@ app.layout = html.Div([
 
     dcc.Graph(id='regression-plot'),
     html.Div([
-        html.H2("R² ranking ( score > 0.2 )"),
+        html.H2("R² Ranking ( Score > 0.2 )"),
         dash_table.DataTable(
             id='leaderboard',
             columns=[
@@ -59,7 +59,7 @@ app.layout = html.Div([
 
     # Auswahl für K-Means Clustering
     html.Div([
-        html.H2("Anzahl der Cluster"),
+        html.Label("The number of clusters"),
         dcc.Dropdown(
             id='num-clusters',
             options=[{'label': str(k), 'value': k} for k in range(2, 6)],
