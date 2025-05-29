@@ -39,21 +39,27 @@ app.layout = html.Div([
         ),
     ], style={'width': '48%', 'display': 'inline-block'}),
 
-    dcc.Graph(id='regression-plot'),
     html.Div([
-        html.H2("R² Ranking ( Score > 0.2 )"),
-        dash_table.DataTable(
-            id='leaderboard',
-            columns=[
-                {'name': 'x', 'id': 'X'},
-                {'name': 'y', 'id': 'Y'},
-                {'name': 'R² score', 'id': 'R2', 'type': 'numeric', 'format': {'specifier': '.4f'}}
-            ],
-            data=initial_leaderboard,
-            sort_action='native',
-            style_table={'width': '50%'},
-            style_cell={'textAlign': 'center'},
-        )]),
+        html.Div([
+            dcc.Graph(id='regression-plot'),
+        ], style={'width': '65%', 'padding': '10px'}),
+
+        html.Div([
+            html.H2("R² Ranking ( Score > 0.2 )"),
+            dash_table.DataTable(
+                id='leaderboard',
+                columns=[
+                    {'name': 'x', 'id': 'X'},
+                    {'name': 'y', 'id': 'Y'},
+                    {'name': 'R² score', 'id': 'R2', 'type': 'numeric', 'format': {'specifier': '.4f'}}
+                ],
+                data=initial_leaderboard,
+                sort_action='native',
+                style_table={'width': '50%'},
+                style_cell={'textAlign': 'center'},
+            )], style={'width': '35%', 'padding': '10px'})
+        ], style={'display': 'flex'}
+    ),
 
     dcc.Store(id='leaderboard-store', data=initial_leaderboard),
 
