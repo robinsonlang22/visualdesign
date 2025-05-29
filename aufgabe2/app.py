@@ -96,11 +96,6 @@ def update_graph(x_col, y_col, leaderboard_data):
     x = df[[x_col]].values
     y = df[y_col].values
 
-    # normalized data by z-score
-    scaler = StandardScaler()
-    x = scaler.fit_transform(x)
-    y = scaler.fit_transform(y.reshape(-1, 1)).flatten()
-
     model = LinearRegression()
     model.fit(x, y)
     y_pred = model.predict(x)
