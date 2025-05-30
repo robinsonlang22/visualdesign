@@ -18,11 +18,11 @@ initial_leaderboard = []
 
 # Layout
 app.layout = html.Div([
-    html.H1("Wine Data: Regression and Clustering"),
-    html.H2("Please select the two varibles to generate the graph"),
+    html.H1("Regression und Clustering von Weindaten"),
+    html.H2("Bitte wählen Sie zwei Variablen aus"),
 
     html.Div([
-        html.Label("VARIBEL X"),
+        html.Label("VARIABLE X"),
         dcc.Dropdown(
             id='x-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
@@ -31,7 +31,7 @@ app.layout = html.Div([
     ], style={'width': '48%', 'display': 'inline-block'}),
 
     html.Div([
-        html.Label("VARIBEL Y"),
+        html.Label("VARIABLE Y"),
         dcc.Dropdown(
             id='y-axis',
             options=[{'label': col, 'value': col} for col in numeric_columns],
@@ -65,7 +65,7 @@ app.layout = html.Div([
 
     # Auswahl für K-Means Clustering
     html.Div([
-        html.Label("The number of clusters"),
+        html.Label("Anzahl der Cluster"),
         dcc.Dropdown(
             id='num-clusters',
             options=[{'label': str(k), 'value': k} for k in range(2, 6)],
@@ -106,7 +106,7 @@ def update_graph(x_col, y_col, leaderboard_data):
     fig.add_trace(go.Scatter(x=x.flatten(), y=y_pred, mode='lines', name='Fit'))
 
     fig.update_layout(
-        title=f"liner regression：{x_col} ~ {y_col} <br>R² score: {r2:.4f}",
+        title=f"Lineare Regression：{x_col} ~ {y_col} <br>R² score: {r2:.4f}",
         xaxis_title=x_col,
         yaxis_title=y_col,
         template="plotly_white"
