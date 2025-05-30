@@ -63,15 +63,19 @@ app.layout = html.Div([
 
     dcc.Store(id='leaderboard-store', data=initial_leaderboard),
 
-    # Auswahl für K-Means Clustering
-    html.Div([
-        html.Label("Anzahl der Cluster"),
-        dcc.Dropdown(
-            id='num-clusters',
-            options=[{'label': str(k), 'value': k} for k in range(2, 6)],
-            value=3
-        ),
-    ], style={'width': '48%', 'display': 'inline-block'}),
+ # Auswahl für K-Means Clustering
+html.Div([
+    html.Label("Anzahl der Cluster"),
+    dcc.Slider(
+        id='num-clusters',
+        min=2,
+        max=5,
+        step=1,
+        value=3,
+        marks={k: str(k) for k in range(2, 6)},
+        tooltip={"placement": "bottom", "always_visible": True}
+    ),
+], style={'width': '48%', 'display': 'inline-block'}),
 
     dcc.Graph(id='clustering-plot'),
     dcc.Graph(id='davies-bouldin-plot'),
