@@ -187,12 +187,6 @@ def create_metrics_df(results_dict):
 df_cv = create_metrics_df(cv_results)
 df_bootstrap = create_metrics_df(bootstrap_results)
 
-# def encode_image(path):
-#     with open(path, 'rb') as f:
-#         return base64.b64encode(f.read()).decode()
-
-# tree_img_cv = encode_image("tree_cv.png")
-
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
@@ -266,20 +260,6 @@ def update_confusion_matrix(selected_model, selected_tab):
         yaxis_title="True"
     )
     return fig
-
-# @app.callback(
-#     Output('tree-image-container', 'children'),
-#     Input('model-dropdown', 'value'),
-#     Input('tabs', 'value')
-# )
-# def display_tree_image(model_selected):
-#     if model_selected != 'Decision Tree':
-#         return None
-#     img = tree_img_cv
-#     return html.Div([
-#         html.H3(f"Decision Tree Visualization"),
-#         html.Img(src=f"data:image/png;base64,{img}", style={'width': '100%', 'height': 'auto'})
-#     ])
 
 if __name__ == '__main__':
     app.run(debug=True)
