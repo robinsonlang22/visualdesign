@@ -219,6 +219,7 @@ app.layout = html.Div([
     Output('metrics-graph', 'children'),
     Input('tabs', 'value')
 )
+
 def update_metrics_graph(selected_tab):
     if selected_tab == 'cv':
         df = df_cv
@@ -237,6 +238,7 @@ def update_metrics_graph(selected_tab):
     [Input('model-dropdown', 'value'),
      Input('tabs', 'value')]
 )
+
 def update_confusion_matrix(selected_model, selected_tab):
     if selected_tab == 'cv':
         cm = cv_results[selected_model]['confusion_matrix']
