@@ -21,6 +21,14 @@ from dash import dcc, html, Input, Output
 import plotly.express as px
 import plotly.graph_objects as go
 
+import base64
+
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode("utf-8")
+    return f"data:image/png;base64,{encoded}"
+
+
 
 df = pd.read_csv('titanic.csv')
 
@@ -184,6 +192,36 @@ def create_metrics_df(results_dict):
             })
     return pd.DataFrame(data_for_chart)
 
+def create_zoomable_image(src):
+    fig = go.Figure()
+
+    # Add the image to the layout
+    fig.add_layout_image(
+        dict(
+            source=src,
+            xref="paper",  # Relative positioning to the paper domain
+            yref="paper",
+            x=0,
+            y=1,
+            sizex=1,
+            sizey=1,
+            sizing="contain",  # Ensures the entire image is visible
+            opacity=1,
+            layer="below"
+        )
+    )
+
+    # Hide axis visuals
+    fig.update_xaxes(visible=False, range=[0, 1])
+    fig.update_yaxes(visible=False, range=[0, 1])
+    fig.update_layout(
+        margin=dict(l=0, r=0, t=0, b=0),
+        dragmode="zoom",  # Allows zooming via drag
+        hovermode=False,
+    )
+
+    return fig
+    
 df_cv = create_metrics_df(cv_results)
 df_bootstrap = create_metrics_df(bootstrap_results)
 
@@ -191,14 +229,14 @@ app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.H1("Model Evaluation Dashboard"),
-
+    
     dcc.Tabs(id='tabs', value='cv', children=[
         dcc.Tab(label="Cross Validation (10-Fold)", value='cv'),
         dcc.Tab(label="Bootstrapping (0.632)", value='bootstrap'),
     ]),
-
+    
     html.Div(id='metrics-graph'),
-
+    
     html.H2("Confusion Matrix"),
     html.Div([
         html.Label("Select Model:"),
@@ -210,9 +248,24 @@ app.layout = html.Div([
             style={'width': '50%'}
         ),
         dcc.Graph(id='confusion-matrix-graph'),
-        html.Div(id='tree-image-container')
-    ])
+    ]),
+    
+    html.H2("Decision Tree Visualization"),
+    dcc.Graph(id='tree-zoomable', config={'scrollZoom': True})  # Enable scroll zoom
 ])
+# Callback for updating the zoomable image
+@app.callback(
+    Output('tree-zoomable', 'figure'),
+    Input('tabs', 'value')
+)
+def update_tree_zoomable(tab):
+    # You can adjust this logic if needed based on the tab input
+    src = encode_image("tree_cv.png")
+    fig = create_zoomable_image(src)
+    return fig
+    
+def update_tree_image(tab):
+    return encode_image("tree_cv.png")
 
 # Callback to update metrics bar chart
 @app.callback(
@@ -238,6 +291,9 @@ def update_metrics_graph(selected_tab):
     [Input('model-dropdown', 'value'),
      Input('tabs', 'value')]
 )
+
+
+
 
 def update_confusion_matrix(selected_model, selected_tab):
     if selected_tab == 'cv':
