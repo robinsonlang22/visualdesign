@@ -221,7 +221,7 @@ def create_zoomable_image(src):
     )
 
     return fig
-    
+
 df_cv = create_metrics_df(cv_results)
 df_bootstrap = create_metrics_df(bootstrap_results)
 
@@ -229,14 +229,14 @@ app = dash.Dash(__name__)
 
 app.layout = html.Div([
     html.H1("Model Evaluation Dashboard"),
-    
+
     dcc.Tabs(id='tabs', value='cv', children=[
         dcc.Tab(label="Cross Validation (10-Fold)", value='cv'),
         dcc.Tab(label="Bootstrapping (0.632)", value='bootstrap'),
     ]),
-    
+
     html.Div(id='metrics-graph'),
-    
+
     html.H2("Confusion Matrix"),
     html.Div([
         html.Label("Select Model:"),
@@ -249,7 +249,7 @@ app.layout = html.Div([
         ),
         dcc.Graph(id='confusion-matrix-graph'),
     ]),
-    
+
     html.H2("Decision Tree Visualization"),
     dcc.Graph(id='tree-zoomable', config={'scrollZoom': True})  # Enable scroll zoom
 ])
@@ -263,7 +263,7 @@ def update_tree_zoomable(tab):
     src = encode_image("tree_cv.png")
     fig = create_zoomable_image(src)
     return fig
-    
+
 def update_tree_image(tab):
     return encode_image("tree_cv.png")
 
