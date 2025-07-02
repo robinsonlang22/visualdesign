@@ -1,0 +1,22 @@
+# Core data science libs
+pandas>=1.0.0
+numpy>=1.18.0
+scipy>=1.4.1,<1.10.0
+matplotlib>=3.0.0
+seaborn>=0.10.0
+plotly>=5.0.0
+scikit-learn>=0.24.0
+scikit-plot>=0.3.7
+
+# Deep learning
+tensorflow>=2.0.0
+
+# Dash ecosystem
+dash>=2.0.0
+dash-core-components>=2.0.0
+dash-html-components>=2.0.0
+dash-table>=5.0.0
+
+# Model visualization
+pydot>=1.4.2
+graphviz>=0.16
