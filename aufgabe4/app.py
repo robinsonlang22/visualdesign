@@ -136,4 +136,4 @@ def update_plots(selected_idx):
 
 # --- 5. App starten ---
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run(debug=True)
